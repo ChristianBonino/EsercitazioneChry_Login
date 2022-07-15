@@ -38,9 +38,15 @@ namespace EsercitazioneChry_Login.Controllers
             return View();
         }
 
-        public IActionResult Login()
+        [Authorize]
+        public IActionResult HiddenPage()
         {
             return View();
+        }
+        public IActionResult Login()
+        {
+            LoginModel model = new LoginModel();
+            return View(model);
         }
 
         [HttpPost]
@@ -54,7 +60,6 @@ namespace EsercitazioneChry_Login.Controllers
                     var result = await signInManager.PasswordSignInAsync(loginModel.UserName, loginModel.Password, false, lockoutOnFailure: true);
                     if (result.Succeeded)
                     {
-
                     }
                 }
             }
